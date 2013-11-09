@@ -1,11 +1,11 @@
 Summary:	Document viewer
 Name:		zathura
-Version:	0.2.4
-Release:	4
+Version:	0.2.5
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	https://pwmt.org/projects/zathura/download/%{name}-%{version}.tar.gz
-# Source0-md5:	935c6e15f5b7688bf4024ec7fe45f064
+# Source0-md5:	a16bd5a892423f14b2f08e0312c42d21
 BuildRequires:	check
 BuildRequires:	girara-devel
 BuildRequires:	intltool
@@ -32,6 +32,7 @@ This is the package containing the development files for zathura.
 
 %{__sed} -i "s/^DFLAGS.*/DFLAGS =/" config.mk
 %{__sed} -i "s|^PLUGINDIR.*|PLUGINDIR ?= %{_libdir}/zathura|" config.mk
+%{__sed} -i "s|^ZATHURA_GTK_VERSION.*|ZATHURA_GTK_VERSION ?= 2|" config.mk
 
 %build
 export CFLAGS="%{rpmcflags}"
@@ -47,7 +48,9 @@ install -d $RPM_BUILD_ROOT%{_libdir}/zathura
 	LIBDIR=%{_libdir}
 
 # FIXME: wrong locale dir names
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{id_ID,ta_IN,uk_UA}
+mv $RPM_BUILD_ROOT%{_localedir}/id{_ID,}
+mv $RPM_BUILD_ROOT%{_localedir}/ta{_IN,}
+mv $RPM_BUILD_ROOT%{_localedir}/uk{_UA,}
 
 %find_lang %{name}
 
