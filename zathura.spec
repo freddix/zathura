@@ -1,13 +1,13 @@
 Summary:	Document viewer
 Name:		zathura
-Version:	0.2.6
-Release:	1
+Version:	0.2.7
+Release:	2
 License:	BSD-like
 Group:		Libraries
 Source0:	https://pwmt.org/projects/zathura/download/%{name}-%{version}.tar.gz
-# Source0-md5:	d155a66ec1862550dfde5a50e3dd6d01
+# Source0-md5:	53124af80e974283a6678319a62e6666
 BuildRequires:	check
-BuildRequires:	girara-devel
+BuildRequires:	girara3-devel
 BuildRequires:	intltool
 BuildRequires:	pkg-config
 BuildRequires:	sqlite3-devel
@@ -32,7 +32,7 @@ This is the package containing the development files for zathura.
 
 %{__sed} -i "s/^DFLAGS.*/DFLAGS =/" config.mk
 %{__sed} -i "s|^PLUGINDIR.*|PLUGINDIR ?= %{_libdir}/zathura|" config.mk
-%{__sed} -i "s|^ZATHURA_GTK_VERSION.*|ZATHURA_GTK_VERSION ?= 2|" config.mk
+%{__sed} -i "s|^ZATHURA_GTK_VERSION.*|ZATHURA_GTK_VERSION ?= 3|" config.mk
 
 %build
 export CFLAGS="%{rpmcflags}"
@@ -51,6 +51,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/zathura
 mv $RPM_BUILD_ROOT%{_localedir}/id{_ID,}
 mv $RPM_BUILD_ROOT%{_localedir}/ta{_IN,}
 mv $RPM_BUILD_ROOT%{_localedir}/uk{_UA,}
+mv $RPM_BUILD_ROOT%{_localedir}/{no,nb}
 
 %find_lang %{name}
 
@@ -63,6 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS LICENSE README
 %attr(755,root,root) %{_bindir}/zathura
 %dir %{_libdir}/zathura
+%{_datadir}/dbus-1/interfaces/org.pwmt.zathura.xml
 %{_desktopdir}/zathura.desktop
 %{_mandir}/man1/zathura.1*
 %{_mandir}/man5/zathurarc.5*
