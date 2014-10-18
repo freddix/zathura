@@ -9,8 +9,10 @@ Source0:	https://pwmt.org/projects/zathura/download/%{name}-%{version}.tar.gz
 BuildRequires:	check
 BuildRequires:	girara3-devel
 BuildRequires:	intltool
+BuildRequires:	libmagic-devel
 BuildRequires:	pkg-config
 BuildRequires:	sqlite3-devel
+BuildRequires:	zlib-devel
 Requires:	zathura-plugin
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -37,7 +39,8 @@ This is the package containing the development files for zathura.
 %build
 export CFLAGS="%{rpmcflags}"
 export LDFLAGS="%{rpmldflags}"
-%{__make}
+%{__make} \
+	QUIET=
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -48,10 +51,10 @@ install -d $RPM_BUILD_ROOT%{_libdir}/zathura
 	LIBDIR=%{_libdir}
 
 # FIXME: wrong locale dir names
-mv $RPM_BUILD_ROOT%{_localedir}/id{_ID,}
-mv $RPM_BUILD_ROOT%{_localedir}/ta{_IN,}
-mv $RPM_BUILD_ROOT%{_localedir}/uk{_UA,}
-mv $RPM_BUILD_ROOT%{_localedir}/{no,nb}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/id{_ID,}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/ta{_IN,}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/uk{_UA,}
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{no,nb}
 
 %find_lang %{name}
 
