@@ -1,11 +1,11 @@
 Summary:	Document viewer
 Name:		zathura
-Version:	0.3.2
+Version:	0.3.3
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	https://pwmt.org/projects/zathura/download/%{name}-%{version}.tar.gz
-# Source0-md5:	4ac91bfbb596decb43c7ef0dcbc3e361
+# Source0-md5:	d360252210ce51a29e8d341b1b72a7cc
 BuildRequires:	check
 BuildRequires:	girara3-devel
 BuildRequires:	intltool
